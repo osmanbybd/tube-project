@@ -13,6 +13,9 @@ const loadVedios =async () =>{
     )
 }
 
+const loadCategoiViedo =(id) =>{
+    console.log(id)
+}
 
 const displayCategoris = (categori) =>{
     const ccategoriContainer = document.getElementById("categori-container");
@@ -20,7 +23,7 @@ const displayCategoris = (categori) =>{
     for(let cat of categori){
         const containerdiv = document.createElement("div");
         containerdiv.innerHTML = `
-         <button class="btn text-base font-medium  hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
+         <button onclick='loadCategoiViedo(${cat.category_id})' class="btn text-base font-medium  hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
         `;
         ccategoriContainer.appendChild(containerdiv);
         
@@ -36,18 +39,27 @@ const displayVedios = (cateviedos) =>{
         viedoDiv.innerHTML = `
         
         <div class="card bg-base-100 shadow-sm">
-        <figure>
-            <img
-            src="${video.thumbnail}" />
-        </figure>
-        <div class="card-body">
-            <h2 class="card-title">${video.title}</h2>
-            <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-            <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
-            </div>
-        </div>
-        </div>
+                <figure class="relative">
+                    <img class= "w-full h-[250px]"
+                    src="${video.thumbnail}" />
+                    <span class="absolute bottom-2 right-2 bg-black  text-gray-300 px-2 text-sm rounded-sm">3hrs 56 min ago</span>
+                </figure>
+
+                <div class="flex px-0 py-5 gap-5 items-center">
+                    <div class="profile">
+                        <div class="avatar">
+                            <div class="w-15 rounded-full">
+                              <img src="${video.authors[0].profile_picture}" />
+                            </div>
+                          </div>
+                    </div>
+                    <div class="intro">
+                        <h1 class="text-xl font-semibold ">${video.title}</h1>
+                        <p class="text-gray-400 text-sm flex  gap-1">${video.authors[0].profile_name} <img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" alt=""></p>
+                        <p class="text-gray-400 text-sm">${video.others.views} views</p>
+                    </div>
+                </div>
+                </div>
                 
         `;
          viedoContainer.appendChild(viedoDiv);
@@ -63,4 +75,3 @@ const displayVedios = (cateviedos) =>{
 
 loadCategotis()
 
-loadVedios()
